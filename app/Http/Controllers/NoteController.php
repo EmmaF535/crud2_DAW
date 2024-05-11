@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Note;
+use App\Models\Notes;
 
 class NoteController extends Controller
 {
@@ -14,7 +14,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $notes = Note::todas_las_notas();
+        $notes = Notes::todas_las_notas();
         // dd($notes);
         return view('notes.index', compact('notes'));
     }
@@ -37,7 +37,7 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        Note::create([
+        Notes::create([
             'title' =>  $request->title,
             'content'   =>  $request->content
         ]);
@@ -55,7 +55,7 @@ class NoteController extends Controller
     public function show($id)
     {
         return view('notes.show')
-            ->with('note', Note::nota_por_id($id));
+            ->with('note', Notes::nota_por_id($id));
     }
 
     /**
@@ -67,7 +67,7 @@ class NoteController extends Controller
     public function edit($id)
     {
         return view('notes.edit')
-            ->with('note', Note::nota_por_id($id));
+            ->with('note', Notes::nota_por_id($id));
     }
 
     /**
@@ -79,7 +79,15 @@ class NoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $note =  Notes::nota_por_id($id);
+
+        $note->update([
+            'title'=>$request->title,
+            'content'=>$request->content,
+            'categorie'=>$request->categorie
+        ]);
+
+        return redirect()->route('notes.show', $id);
     }
 
     /**
@@ -90,6 +98,10 @@ class NoteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $note =  Notes::nota_por_id($id);
+
+        $note->delete();
+
+        return redirect()->route('notes.index');
     }
 }

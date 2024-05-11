@@ -39,6 +39,9 @@
                         <input type="submit" value="Crear Categoria" class="btn btn-success">
                     </div>
 
+                    <div class="text-end">
+                        <p>Categoria</p>
+                    </div>
                 </form>
 
             </div>

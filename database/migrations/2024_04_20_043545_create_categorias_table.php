@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('porNombre', 50);
             $table->boolean('active')->default(true);
+            $table->string('notaEnCategoria', 20); 
             $table->timestamps();
         });
-
 
     }
 

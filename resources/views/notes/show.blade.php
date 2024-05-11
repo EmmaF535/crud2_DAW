@@ -20,8 +20,8 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-12 col-md-9 col col-lg-6">
-                <table class="table">
+            <div class="col-12 col-md-9 col-lg-6">
+                <table class="table mb-4">
                     <tbody>
                         <tr>
                             <td><b>Created at:</b> {{ $note->created_at->diffForHumans() }}</td>
@@ -31,9 +31,19 @@
                 </table>
 
                 <p style="white-space: pre-wrap;">{{ $note->content }}</p>
+
+                <div class="text-end">
+                    <a href="{{ route('notes.edit', $note->id) }}" class="btn btn-warning">Editar Nota</a>
+
+                    <form action="{{ route('notes.destroy', $note->id) }}" method="post">
+                        @csrf
+                        @method('delete')
+
+                        <input type="submit" value="Eliminar nota" class="btn btn-danger" onclick="return confirm('¿Estas seguro que quieres eliminar la nota?')">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-
 </body>
 </html>

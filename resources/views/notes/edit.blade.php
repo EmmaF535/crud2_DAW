@@ -14,7 +14,7 @@
         <div class="row mb-4">
             <div class="col">
                 <header class="bg-danger py-3 text-center">
-                    <h1 class="mb-0 text-white">Crear Nota</h1>
+                    <h1 class="mb-0 text-white">Editar Nota</h1>
                 </header>
             </div>
         </div>
@@ -22,8 +22,9 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-9 col-lg-6">
                 
-                <form action="{{ route('notes.store') }}" method="post">
+                <form action="{{ route('notes.update', $note->id) }}" method="post">
                     @csrf
+                    @method('put')
 
                     <div class="mb-3">
                         <label for="" class="form-label">Título</label>
@@ -32,7 +33,7 @@
                     
                     <div class="mb-3">
                         <label for="" class="form-label">Contenido</label>
-                        <textarea name="content" rows="10" class="form-control"></textarea>
+                        <textarea name="content" rows="10" class="form-control">{{ $note->content }}</textarea>
                     </div>
 
                     <div class="text-end">
